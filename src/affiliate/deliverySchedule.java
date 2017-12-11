@@ -1,4 +1,4 @@
-package datastructureassignment;
+package affiliate;
 
 /*
 Auther : Tan Kai Lun
@@ -94,6 +94,10 @@ public class deliverySchedule {
         cstate = sc.nextLine();
         System.out.printf("Payment status (1=paid, 2=un pay): ");
         cpaymentStatus = sc.next();
+        if (cpaymentStatus.equals("2")) {
+            System.out.printf("Enter the price need to pay ");
+            sc.next();
+        }
         System.out.printf("Are you sure to add this record? (y=yes, n=no)\t : ");
         sc.nextLine();
         if (sc.nextLine().equals("y")) {

@@ -4,34 +4,36 @@ Group 10
 Member group 3 part A
 Task ID : 152569170
 User story : As a restaurant owner, I want register as an affiliates, so that I can maintain the food menu.
- */
-package datastructureassignment;
+*/
+package affiliate;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.Scanner;
 
 public class AffiliatesRegistration {
-
+    //static LinkedStack<String> ls = new LinkedStack<>();
+    static AffiliateClass as = new AffiliateClass();
     static Scanner sc = new Scanner(System.in);
     static String userID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
     static String toAddAffiliates = "y";
     
-    static List<String> userIDL = new ArrayList<>();
-    static List<String> restaurantNameL = new ArrayList<>();
-    static List<String> nameL = new ArrayList<>();
-    static List<String> emailL = new ArrayList<>();
-    static List<String> passwordL = new ArrayList<>();
-    static List<String> passwordHitL = new ArrayList<>();
-    static List<String> icnoL = new ArrayList<>();
-    static List<String> phoneNoL = new ArrayList<>();
-    static List<String> address1L = new ArrayList<>();
-    static List<String> address2L = new ArrayList<>();
-    static List<String> cityL = new ArrayList<>();
-    static List<String> stateL = new ArrayList<>();
-    static List<String> zipCodeL = new ArrayList<>();
+    static LinkedStack<String> userIDL = new LinkedStack<>();
+    static LinkedStack<String> restaurantNameL = new LinkedStack<>();
+    static LinkedStack<String> nameL = new LinkedStack<>();
+    static LinkedStack<String> emailL = new LinkedStack<>();
+    static LinkedStack<String> passwordL = new LinkedStack<>();
+    static LinkedStack<String> passwordHitL = new LinkedStack<>();
+    static LinkedStack<String> icnoL = new LinkedStack<>();
+    static LinkedStack<String> phoneNoL = new LinkedStack<>();
+    static LinkedStack<String> address1L = new LinkedStack<>();
+    static LinkedStack<String> address2L = new LinkedStack<>();
+    static LinkedStack<String> cityL = new LinkedStack<>();
+    static LinkedStack<String> stateL = new LinkedStack<>();
+    static LinkedStack<String> zipCodeL = new LinkedStack<>();
 
     public static void main(String[] args) {
+        
         //AffiliatesRegistration ar = new AffiliatesRegistration();
         while (toAddAffiliates.equals("y")) {
             AffiliatesReg();
@@ -90,19 +92,19 @@ public class AffiliatesRegistration {
             //break;
         }
 
-        userIDL.add(userID);
-        restaurantNameL.add(restaurantName);
-        nameL.add(name);
-        passwordL.add(password);
-        passwordHitL.add(passwordHit);
-        icnoL.add(icno);
-        phoneNoL.add(phoneNo);
-        emailL.add(email);
-        address1L.add(address1);
-        address2L.add(address2);
-        cityL.add(city);
-        stateL.add(state);
-        zipCodeL.add(zipCode);
+        userIDL.push(userID);
+        restaurantNameL.push(restaurantName);
+        nameL.push(name);
+        passwordL.push(password);
+        passwordHitL.push(passwordHit);
+        icnoL.push(icno);
+        phoneNoL.push(phoneNo);
+        emailL.push(email);
+        address1L.push(address1);
+        address2L.push(address2);
+        cityL.push(city);
+        stateL.push(state);
+        zipCodeL.push(zipCode);
 
         //System.out.println("User ID\t: " + userIDL);
         System.out.printf("====================================\nDo You want to add more affiliates?(y=yes, n=no): ");
