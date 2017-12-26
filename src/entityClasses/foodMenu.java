@@ -1,6 +1,7 @@
 package entityClasses;
 
 import adt.*;
+import static entityClasses.AffiliateLogin.loginedID;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,8 +23,6 @@ public class foodMenu {
     static String toAddFood = "y", toEditFood = "y", mainChoice, leaveMenu = "y";
     static ListInterface<foodMenuClass> foodM = new LList<>();
 
-   
-
     public static void FoodMainMenu() {
         toAddFood = "y";
         System.out.printf("\n-- Fastest Deliveryman --\nrestaurant food menu\n====================================\n"
@@ -32,7 +31,7 @@ public class foodMenu {
         do {
             System.out.printf("Enter number : ");
             mainChoice = sc.nextLine();
-
+            fmc.affID = loginedID;
             if (!mainChoice.equals("1") && !mainChoice.equals("2")) {
                 System.out.printf("Invalid choice, ");
             }
@@ -40,38 +39,19 @@ public class foodMenu {
 
         switch (mainChoice) {
             case "1":
-                affID();
                 fmc.foodCode = 0;
                 while (toAddFood.equalsIgnoreCase("y")) {
                     AddFood();
                 }
                 break;
             case "2":
-                //affID();
-//                while (toEditFood.equals("y")) {
                 EditFood();
-//                }
                 break;
         }
     }
 
-    public static void affID() {
-        System.out.println("\n-- Fastest Deliveryman --\nrestaurant food menu\n====================================");
-        System.out.printf("Enter Affiliate ID\t: ");
-        fmc.affID = sc.nextLine();
-    }
-
     public static void AddFood() {
         foodM = retrieveFoodMenu();
-//        System.out.println("\nBusiness Hour\n====================================");
-//        System.out.printf("Business Days in week\t:\n");
-//        System.out.println("format:1,2,3,4,5(Mondays to Fridays)");
-//        System.out.printf("PLease enter the number\t:");
-//        openDays = sc.nextLine();
-//        System.out.printf("\n\nBusiness Time - Start\t(23:00):");
-//        openTimeStart = sc.nextLine();
-//        System.out.printf("\n\nBusiness Time - End\t(23:00):");
-//        openTimeStart = sc.nextLine();
         System.out.println("\nFoods\n====================================");
         fmc.foodCode++;
         System.out.println(fmc.foodCode);
@@ -96,15 +76,11 @@ public class foodMenu {
     }
 
     public static void EditFood() {
-        //boolean foodIsValid = true;
         foodM = retrieveFoodMenu();
         System.out.printf("Enter food ID\t: ");
         fmc.foodID = sc.nextLine();
         for (int j = 1; j < foodM.getNumberOfEntries() + 1; j++) {
-            //for testinng
-            //System.out.println(fmc.foodID + " "+ foodM.getEntry(j).getFoodID());
             if (fmc.foodID.equals(foodM.getEntry(j).getFoodID())) {
-                //foodIsValid = true;
                 System.out.println("Item found, food name : " + foodM.getEntry(j).getFoodName() + " " + foodM.getEntry(j).getFoodPrice() + "\nPlease Enter new details");
                 System.out.printf("Name\t\t: ");
                 fmc.setFoodName(sc.nextLine());
@@ -117,24 +93,14 @@ public class foodMenu {
                 sc.nextLine();
                 foodM.replace(j, fmc);
                 saveFoodMenu();
-                //break;
             } else {
-                //foodIsValid = false;
-//                System.out.println("Item not found");
-//                break;
             }
         }
-
-        //sc.nextLine();
     }
 
     public static class foodMenuStream implements Serializable {
 
         public String affID = null;
-//        public String openDays = null;
-//        public String openTimeStart = null;
-//        public String openTimeEnd = null;
-//        public String restaufoodID = null;
         public String foodName = null;
         public String foodDesc = null;
         public String foodPrice = null;

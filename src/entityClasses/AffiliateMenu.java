@@ -33,7 +33,7 @@ public class AffiliateMenu {
             switch (affMenuChoice) {
                 case "1":
                     while (toAddAffiliates.equalsIgnoreCase("y")) {
-                        affiliates = retrieveAffiliate();
+                        affiliates = Affiliate_retrieve.retrieveAffiliate();
                         AffiliatesReg();
                     }
                     System.out.println("Press Enter to Continue...");
