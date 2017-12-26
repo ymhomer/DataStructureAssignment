@@ -15,8 +15,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class deliverySchedule {
     static Scanner sc = new Scanner(System.in);
@@ -26,18 +24,17 @@ public class deliverySchedule {
     
     static deliveryClass dc = new deliveryClass();
     
-   
-    
-    public static void loginPage() throws IOException, ClassNotFoundException {
-        System.out.println("\n-- Fastest Deliveryman --\nDelivery\n====================================");
-        System.out.printf("Enter Restaurant ID\t: ");
-        dc.userID = sc.next();
-        System.out.printf("Password\t\t: ");
-        dc.password = sc.next();
-        while(quit.equals("f")){
-            deliveryMenu();
-        }
-    }
+//    
+//    public static void loginPage() throws IOException, ClassNotFoundException {
+//        System.out.println("\n-- Fastest Deliveryman --\nDelivery\n====================================");
+//        System.out.printf("Enter Restaurant ID\t: ");
+//        dc.userID = sc.next();
+//        System.out.printf("Password\t\t: ");
+//        dc.password = sc.next();
+//        while(quit.equals("f")){
+//            deliveryMenu();
+//        }
+//    }
     
     public static void deliveryMenu() throws IOException, ClassNotFoundException {
         System.out.println("\n-- Fastest Deliveryman --\nDelivery\n====================================");
