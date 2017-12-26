@@ -31,12 +31,15 @@ public class PartBMenu {
             new viewPendingDeliveryMan();
         }
         else if (select.equals("4")) {
-            new viewDailyReport();
+            new viewTotalDeliveredDoneDaily();
         }
         else if (select.equals("5")) {
+            new viewDistanceTravelledDaily();
+        }
+        else if (select.equals("6")) {
             
         }
-        else if (!select.equals("1") || !select.equals("2") || !select.equals("3") || !select.equals("4") || !select.equals("5")){
+        else if (!select.equals("1") || !select.equals("2") || !select.equals("3") || !select.equals("4") || !select.equals("5") || !select.equals("6")){
             System.err.println("\nPlease select the number from 1,2,3,4,5 only!!!");
         }
     }
@@ -50,8 +53,9 @@ public class PartBMenu {
         System.out.println("1. Add Delivery Man Details");
         System.out.println("2. Update Delivery Man Details");
         System.out.println("3. View Pending Delivery Man");
-        System.out.println("4. View Daily Report");
-        System.out.println("5. Exit");
+        System.out.println("4. View Total Delivered Done in Daily Report");
+        System.out.println("5. View Distance that heve travelled Report");
+        System.out.println("6. Exit");
         
         System.out.print("\nPlease enter your selection : ");
         return scanner.nextLine();

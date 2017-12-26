@@ -25,7 +25,7 @@ public class homePage {
         select = menu();
         
         if(select == 1) {
-            new AffiliateMenu();
+            new AffiliateLogin();
         }
         else if (select == 2) {
             new PartBMenu();
@@ -34,7 +34,7 @@ public class homePage {
             new DataStructure();
         }
         else if (select == 4) {
-            
+            new PartDMenu();
         }
          
     }

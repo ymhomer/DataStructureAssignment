@@ -23,7 +23,7 @@ public class AssignJob {
 private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>();
 private static ListInterface<Order> orderList = new LList<>();
 
-    public static void main(String[] args) {
+    public AssignJob() {
         char selection;
         do{
             

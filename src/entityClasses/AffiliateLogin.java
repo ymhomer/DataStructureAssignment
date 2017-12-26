@@ -12,11 +12,7 @@ public class AffiliateLogin {
     static String loginedID,loginOwner;
     static ListInterface<AffiliateClass> affiliates = new LList<>();
 
-    public static void main(String[] args) {
-        AffiliateLogin();
-    }
-
-    public static void AffiliateLogin() {
+    public AffiliateLogin() {
         affiliates = Affiliate_retrieve.retrieveAffiliate();
 
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Login\n====================================");

@@ -1,3 +1,4 @@
+package entityClasses;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,12 +26,6 @@ private static ListInterface<Order> orderList = new LList<>();
 private static ListInterface<Customer> custList = new LList<>();
 private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>();
 
-    public static void main(String[] args) {
-          
-        CountTime cT = new CountTime();
-        cT.input();
-    }
-    
     
     public void input() {
         Scanner custID = new Scanner(System.in);
@@ -86,7 +81,7 @@ private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>()
         if(custUser.equals(custList.getEntry(i).getUserName())) {
             if(orderNo == orderList.getEntry(n).getOrderID() && orderList.getEntry(n).getJobStatus().equals("Undone")) {
                   //System.out.println(custUser.equals(custList.getEntry(i).getUserName()));
-              if(custList.getEntry(i).getHomeAddress().equals("12,Jalan Prima,Taman Prima ")) {
+              if(custList.getEntry(i).getHomeAddress().equals("12,Jalan Prima,Taman Prima ")) { //1
                   if(orderList.getEntry(n).getDeliverymenID().equals(listDeliveryMan.getEntry(a).getNewDeliveryID())) {
               
               System.out.println("Item             : " + orderList.getEntry(n).getFood());
@@ -145,12 +140,12 @@ private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>()
             }
                    }
                 }
-              else if(custList.getEntry(i).getHomeAddress().equals("PV16,Taman Danau Kota")) {
+              else if(custList.getEntry(i).getHomeAddress().equals("PV16,Taman Danau Kota")) { //2
                   if(orderList.getEntry(n).getDeliverymenID().equals(listDeliveryMan.getEntry(a).getNewDeliveryID())) {
               
               System.out.println("Item             : " + orderList.getEntry(n).getFood());
               System.out.println("Restaurant       : " + orderList.getEntry(n).getRestaurant());
-              System.out.println("Address          : "  + custList.getEntry(i).getHomeAddress());
+              System  .out.println("Address          : "  + custList.getEntry(i).getHomeAddress());
               System.out.println("Date & Time      : " + orderList.getEntry(n).getDateTime());
               
               try {
@@ -161,7 +156,178 @@ private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>()
                 Date date2 = null;
                 date2 = sdf.parse(orderList.getEntry(n).getDateTime());
                 c.setTime(date2);
-                c.add(Calendar.MINUTE, 30);
+                c.add(Calendar.MINUTE, 40);
+                date2 = c.getTime();
+                Calendar cal = new GregorianCalendar();
+                Date sysDate = new Date();
+
+                long diff = date2.getTime() - sysDate.getTime();
+                
+                long diffMinutes = diff / (60 * 1000) % 60;
+                
+                if(diffMinutes > 0) {
+                  System.out.println("Your item will be reached within "+ diffMinutes + " minutes.");  
+                }
+                else if(diffMinutes <= 0) {
+                    System.out.println("It reached your home\n"); 
+                    orderList.getEntry(n).setJobStatus("Done");
+                    listDeliveryMan.getEntry(a).setPendingDeliveryStatus("No Pending");
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("orderList.dat"));
+                 ooStream.writeObject(orderList);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("deliveryManDetails.dat"));
+                 ooStream.writeObject(listDeliveryMan);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+           
+                  }
+              }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+                   }
+                }
+               else if(custList.getEntry(i).getHomeAddress().equals("PV20,Taman Danau Kota")) { //3
+                  if(orderList.getEntry(n).getDeliverymenID().equals(listDeliveryMan.getEntry(a).getNewDeliveryID())) {
+              
+              System.out.println("Item             : " + orderList.getEntry(n).getFood());
+              System.out.println("Restaurant       : " + orderList.getEntry(n).getRestaurant());
+              System  .out.println("Address          : "  + custList.getEntry(i).getHomeAddress());
+              System.out.println("Date & Time      : " + orderList.getEntry(n).getDateTime());
+              
+              try {
+                Calendar c = new GregorianCalendar();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                Date date = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date);
+                Date date2 = null;
+                date2 = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date2);
+                c.add(Calendar.MINUTE, 45);
+                date2 = c.getTime();
+                Calendar cal = new GregorianCalendar();
+                Date sysDate = new Date();
+
+                long diff = date2.getTime() - sysDate.getTime();
+                
+                long diffMinutes = diff / (60 * 1000) % 60;
+                
+                if(diffMinutes > 0) {
+                  System.out.println("Your item will be reached within "+ diffMinutes + " minutes.");  
+                }
+                else if(diffMinutes <= 0) {
+                    System.out.println("It reached your home\n"); 
+                    orderList.getEntry(n).setJobStatus("Done");
+                    listDeliveryMan.getEntry(a).setPendingDeliveryStatus("No Pending");
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("orderList.dat"));
+                 ooStream.writeObject(orderList);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("deliveryManDetails.dat"));
+                 ooStream.writeObject(listDeliveryMan);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+           
+                  }
+              }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+                   }
+                }
+                    else if(custList.getEntry(i).getHomeAddress().equals("Jalan Prima Setapak,Taman Prima")) { //4
+                  if(orderList.getEntry(n).getDeliverymenID().equals(listDeliveryMan.getEntry(a).getNewDeliveryID())) {
+              
+              System.out.println("Item             : " + orderList.getEntry(n).getFood());
+              System.out.println("Restaurant       : " + orderList.getEntry(n).getRestaurant());
+              System  .out.println("Address          : "  + custList.getEntry(i).getHomeAddress());
+              System.out.println("Date & Time      : " + orderList.getEntry(n).getDateTime());
+              
+              try {
+                Calendar c = new GregorianCalendar();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                Date date = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date);
+                Date date2 = null;
+                date2 = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date2);
+                c.add(Calendar.MINUTE, 25);
+                date2 = c.getTime();
+                Calendar cal = new GregorianCalendar();
+                Date sysDate = new Date();
+
+                long diff = date2.getTime() - sysDate.getTime();
+                
+                long diffMinutes = diff / (60 * 1000) % 60;
+                
+                if(diffMinutes > 0) {
+                  System.out.println("Your item will be reached within "+ diffMinutes + " minutes.");  
+                }
+                else if(diffMinutes <= 0) {
+                    System.out.println("It reached your home\n"); 
+                    orderList.getEntry(n).setJobStatus("Done");
+                    listDeliveryMan.getEntry(a).setPendingDeliveryStatus("No Pending");
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("orderList.dat"));
+                 ooStream.writeObject(orderList);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+                try {
+                 ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("deliveryManDetails.dat"));
+                 ooStream.writeObject(listDeliveryMan);
+                 ooStream.close();
+             } catch (FileNotFoundException ex) {
+                 System.err.println("You have error, found no file");
+             } catch (IOException ex) {
+                 System.err.println("You have error");
+             }
+           
+                  }
+              }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+                   }
+                }
+                else if(custList.getEntry(i).getHomeAddress().equals("PV15,Taman Danau Kota")) { //5
+                  if(orderList.getEntry(n).getDeliverymenID().equals(listDeliveryMan.getEntry(a).getNewDeliveryID())) {
+              
+              System.out.println("Item             : " + orderList.getEntry(n).getFood());
+              System.out.println("Restaurant       : " + orderList.getEntry(n).getRestaurant());
+              System  .out.println("Address          : "  + custList.getEntry(i).getHomeAddress());
+              System.out.println("Date & Time      : " + orderList.getEntry(n).getDateTime());
+              
+              try {
+                Calendar c = new GregorianCalendar();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm aa");
+                Date date = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date);
+                Date date2 = null;
+                date2 = sdf.parse(orderList.getEntry(n).getDateTime());
+                c.setTime(date2);
+                c.add(Calendar.MINUTE, 50 );
                 date2 = c.getTime();
                 Calendar cal = new GregorianCalendar();
                 Date sysDate = new Date();
@@ -208,5 +374,5 @@ private static ListInterface<deliveryManDetails> listDeliveryMan = new LList<>()
       }
     }
    }
-    
 }
+    

@@ -25,16 +25,15 @@ public class viewPendingDeliveryMan {
     // display delivery man which have pending to delivery
     public viewPendingDeliveryMan() {
         int count = 0;
+        int orderItem = 0;
+        int j = 0;
         System.out.println("\nPending Deliveries of each delivery msn");
         System.out.println("=======================================");
         
         listDeliveryMan = retrieveDeliveryManDetails();
         orderList = retrieveOrderList();
-        for (int i = 1; i <= orderList.getNumberOfEntries(); i++) {
-        System.out.println(orderList.getEntry(i).getOrderID() + orderList.getEntry(i).getFood());
-        }
+
         for (int i = 1; i <= listDeliveryMan.getNumberOfEntries(); i++) {
-            for (int j = 1; j <= orderList.getNumberOfEntries(); j++) {
             if (listDeliveryMan.getEntry(i).getPendingDeliveryStatus().equals("Pending")) {         
                 count += 1;
                 System.out.println("\n==============");
@@ -54,13 +53,19 @@ public class viewPendingDeliveryMan {
                 System.out.println("Clock-In                : " + listDeliveryMan.getEntry(i).getClockIn());
                 System.out.println("Clock-Out               : " + listDeliveryMan.getEntry(i).getClockOut());
                 System.out.println("Pending Delivery Status : " + listDeliveryMan.getEntry(i).getPendingDeliveryStatus());
+                System.out.println("Order ID                : " + listDeliveryMan.getEntry(i).getOrderID());
                 
-                if (orderList.getEntry(j).getOrderID() == listDeliveryMan.getEntry(i).getOrderID()) {
-                    System.out.println("Order ID                : " + orderList.getEntry(j).getOrderID());
-                    System.out.println("Food Name               : " + orderList.getEntry(j).getFood());
+                System.out.println("\n============================================");
+                System.out.println("\tOrder Item              " );
+                System.out.println("===================================================");
+                System.out.println("Food Name                       Date Time");
+                System.out.println("===================================================");
+                for (j = 1; j <= orderList.getNumberOfEntries(); j++) {                    
+                    if (orderList.getEntry(j).getOrderID() == listDeliveryMan.getEntry(i).getOrderID()) {                    
+                        System.out.printf("%-20s\t\t%-10s\n", orderList.getEntry(j).getFood(), orderList.getEntry(j).getDateTime());
+                    }
                 }
-            }
-            }
+          }
         }
         
         // use to check when the record get from the dat file
