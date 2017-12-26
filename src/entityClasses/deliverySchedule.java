@@ -141,31 +141,28 @@ public class deliverySchedule {
     }
     
     public static void saveDelivery() throws IOException, ClassNotFoundException{
-        ObjectOutputStream orderOutputStream =
-            new ObjectOutputStream(new FileOutputStream("order.dat"));
-        
-        Order order = new Order();
-        order.ID = dc.orderID;
-        order.name = dc.cname;
-        order.phoneNo = dc.cphoneNo;
-        order.address1 = dc.caddress1;
-        order.address2 = dc.caddress2;
-        order.zipCode = dc.czipCode;
-        order.city = dc.ccity;
-        order.state = dc.cstate;
-        order.paymentStatus = dc.cpaymentStatus;
-        
-        orderOutputStream.writeObject(order);
-        orderOutputStream.close();
+        try (ObjectOutputStream orderOutputStream = new ObjectOutputStream(new FileOutputStream("order.dat"))) {
+            Order order = new Order();
+            order.ID = dc.orderID;
+            order.name = dc.cname;
+            order.phoneNo = dc.cphoneNo;
+            order.address1 = dc.caddress1;
+            order.address2 = dc.caddress2;
+            order.zipCode = dc.czipCode;
+            order.city = dc.ccity;
+            order.state = dc.cstate;
+            order.paymentStatus = dc.cpaymentStatus;
+            
+            orderOutputStream.writeObject(order);
+        }
     }
     
     public static void readDelivery() throws IOException, ClassNotFoundException{
         try {
-            ObjectInputStream orderInputStream =
-                new ObjectInputStream(new FileInputStream("order.dat"));
-
-            Order or = (Order) orderInputStream.readObject();
-            orderInputStream.close();
+            Order or;
+            try (ObjectInputStream orderInputStream = new ObjectInputStream(new FileInputStream("order.dat"))) {
+                or = (Order) orderInputStream.readObject();
+            }
             System.out.println("\n-- Fastest Deliveryman --\nCurrent Delivery\n====================================");
             System.out.println("Order ID\t: " + or.ID);
             System.out.println("Customer\t: " + or.name);
